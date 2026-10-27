@@ -563,6 +563,8 @@ def generate_dataset(source_file: Path, dest: Path, *, source: str,
         for b in range(count):
             print(f"Band {b + 1}/{count}", flush=True)
             band = crop_band_at(img, b * HEIGHT, HEIGHT, width, height, 1.0, is_vips)
+            if band is None:
+                raise ValueError(f"band {b} is out of bounds")
             band = apply_gamma(band, gamma)
             entry = {"width": width, "valid_height": min(HEIGHT, height - b * HEIGHT),
                      "chunks": []}
