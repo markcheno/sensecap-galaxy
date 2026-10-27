@@ -1,0 +1,7 @@
+{
+  "folders": [
+    {"name": "Galaxy", "path": "."},
+    {"name": "ESP32 display", "path": "firmware/esp32"},
+    {"name": "RP2040 storage", "path": "firmware/rp2040"}
+  ]
+}

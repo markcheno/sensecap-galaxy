@@ -1,0 +1,40 @@
+menu "Galaxy hardware"
+    config GALAXY_LCD_BOUNCE_BUFFER
+        bool
+        default y
+        select SPIRAM_FETCH_INSTRUCTIONS
+        select SPIRAM_RODATA
+        select LCD_RGB_ISR_IRAM_SAFE
+        select LCD_RGB_RESTART_IN_VSYNC
+        select UART_ISR_IN_IRAM
+        help
+            Required for the RGB driver's SRAM bounce buffers. Keep PSRAM
+            accessible while NVS writes flash, and recover scan alignment at
+            VSYNC after an underrun. Selecting these also upgrades previously
+            generated sdkconfig files when this project is rebuilt.
+            The storage UART ISR also stays in IRAM to receive data while the
+            RGB driver refills bounce buffers or settings are written to flash.
+    config GALAXY_LCD_DX
+        bool "DX display variant (skip GX/ST7701 serial initialization)"
+        default n
+    config GALAXY_TOUCH_SWAP_XY
+        bool "Swap touch X and Y"
+        default n
+    config GALAXY_TOUCH_MIRROR_X
+        bool "Mirror touch X"
+        default y
+        help
+            Reverse the touch controller's X axis to match the GX display.
+            On the tested D1, this makes physical left/right taps correspond
+            to the left/right halves of the rendered image.
+    config GALAXY_TOUCH_MIRROR_Y
+        bool "Mirror touch Y"
+        default y
+        help
+            Reverse the touch controller's Y axis to match the tested GX
+            display, including the source-picker header and source rows.
+    config GALAXY_LCD_PIXEL_CLOCK
+        int "RGB pixel clock in Hz"
+        range 8000000 18000000
+        default 12000000
+endmenu

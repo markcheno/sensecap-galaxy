@@ -1,0 +1,14 @@
+pillow>=10
+requests>=2.31
+
+# Optional. Only needed for sources past roughly a gigapixel (vista,
+# rubin), where Pillow would have to decode the whole mosaic
+# into RAM to crop it. pyvips reads just the rows the band covers.
+#
+# It binds to the libvips C library, so install that first:
+#   brew install vips
+#   uv pip install pyvips
+# Or install the self-contained binary distribution:
+#   uv pip install 'pyvips[binary]'
+#
+# pyvips
